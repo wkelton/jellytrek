@@ -2,7 +2,7 @@ from typing import Any, Dict, List, Optional, Union
 
 from jellyfin_api_client import Client
 from jellyfin_api_client.api.items import get_items_by_user_id
-from jellyfin_api_client.api.playlists import get_playlist_items, create_playlist
+from jellyfin_api_client.api.playlists import get_playlist_items, create_playlist, add_to_playlist, move_item
 from jellyfin_api_client.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin_api_client.models.create_playlist_dto import CreatePlaylistDto
 
@@ -152,3 +152,11 @@ def build_playlist(client: Client, user_id: str, name: str):
 
 def create_jf_playlist(client: Client, user_id: str, name: str, ids: List[str]):
     create_playlist.sync(client=client, json_body=CreatePlaylistDto(name=name, user_id=user_id, ids=ids))
+
+
+def add_to_jf_playlist(client: Client, user_id: str, playlist_id: str, ids: List[str]):
+    add_to_playlist.sync_detailed(client=client, user_id=user_id, playlist_id=playlist_id, ids=ids)
+
+
+def move_item_in_jf_playlist(client: Client, playlist_id: str, id: str, new_index: int):
+    move_item.sync_detailed(client=client, playlist_id=playlist_id, item_id=id, new_index=new_index)

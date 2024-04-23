@@ -84,7 +84,7 @@ class JellyfinClient(Client):
         )
 
 
-def auth(username: str, password: str, client: JellyfinClient) -> AuthenticationResult:
+def authenticate(username: str, password: str, client: JellyfinClient) -> AuthenticationResult:
     response = authenticate_user_by_name.sync_detailed(
         client=client,
         json_body=AuthenticateUserByName(username=username, pw=password),
